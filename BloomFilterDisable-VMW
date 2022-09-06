@@ -1,4 +1,3 @@
-ConeyIsland
 ## Supply the hostname/FQDN for your vcenter server, and the name of the cluster you want remediated
 ## Script remediates each ESXi server in the cluster one at a time
 ## Example ".\nameofthisscript.ps1 vcenter.test.com testcluster"
