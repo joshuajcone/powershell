@@ -26,7 +26,7 @@ foreach($VM in $VMs)
     if ($null -eq $VMTag) {
 
         #Uncomment the next line to output if a VM in the cluster doesn't have a tag assigned to local console
-        #Write-Output "$VM does not have tag assigned"
+        #Write-Output "$VM does not have a tag assigned"
 
         #Email alert if a VM in the cluster doesn't have a tag assigned.
         $MailString = "VM $VM Does not have a tag assigned, it currently lives on $esxHost."
