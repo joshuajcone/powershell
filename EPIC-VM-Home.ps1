@@ -2,10 +2,10 @@
 
 $vCenterServer = "Your vCenter Name"
 $cluster_name = "Your Cluster Name"
-$tag_category = "The category of the tag"
-$sendTo = "sendtoAddress@sterilized.com"
-$From = "vCenter@sterilized.com"
-$Smtp = "smtp-relay.sterilized.com"
+$tag_category = "The Category of the Tag"
+$sendTo = "SendToAddress@Sterilized.com"
+$From = "vCenter@Sterilized.com"
+$Smtp = "SMTP-Relay.Sterilized.com"
 
 #Connect to vCenterServer
 Connect-VIServer -Server $vCenterServer | Out-Null
