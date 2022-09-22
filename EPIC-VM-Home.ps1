@@ -1,7 +1,8 @@
 #Assign tag on VM that matches the home ESXi hostname
 
-$vCenterServer = "vCenter Name"
-$cluster_name = "Cluster Name"
+$vCenterServer = "Your vCenter Name"
+$cluster_name = "Your Cluster Name"
+$tag_category = "The category of the tag"
 $sendTo = "sendtoAddress@sterilized.com"
 $From = "vCenter@sterilized.com"
 $Smtp = "smtp-relay.sterilized.com"
@@ -19,7 +20,7 @@ foreach($VM in $VMs)
     $esxHost = Get-VMHost -VM $VM
 
     #Get the VM Tags 
-    $VMTag = (Get-TagAssignment -Entity $vm -Category "Tag Category Set on Host").Tag.Name
+    $VMTag = (Get-TagAssignment -Entity $vm -Category $tag_category).Tag.Name
 
     #Check to see if the assigned VMTag is Null
     if ($null -eq $VMTag) {
