@@ -25,7 +25,7 @@ foreach($VM in $VMs)
     #Check to see if the assigned VMTag is Null
     if ($null -eq $VMTag) {
 
-        #Output if a VM in the cluster doesn't have a tag assigned
+        #Uncomment the next line to output if a VM in the cluster doesn't have a tag assigned
         #Write-Output "$VM does not have tag assigned"
 
         #Email alert if a VM in the cluster doesn't have a tag assigned.
@@ -36,7 +36,7 @@ foreach($VM in $VMs)
    #Check to see if the assigned VMTag matches the ESXi hostname
    Elseif ($VMTag -notlike $esxHost) {
 
-        #Output the VMname in the wrong location to local console
+        #Uncomment the next line to output the VMname in the wrong location to local console
         #Write-Output "$VM needs to move to $VMTag"
 
         #Output the VMname in the wrong location to email.
