@@ -25,10 +25,10 @@ foreach($VM in $VMs)
     #Check to see if the assigned VMTag is Null
     if ($null -eq $VMTag) {
 
-        #Output stating the VM needs to have the assigned tag. Uncomment next line for this local console dispaly
+        #Output if a VM in the cluster doesn't have a tag assigned
         #Write-Output "$VM does not have tag assigned"
 
-        #Email alert if a VM in the cluster doesn't have a tag assigned
+        #Email alert if a VM in the cluster doesn't have a tag assigned.
         $MailString = "VM $VM Does not have a tag assigned, it currently lives on $esxHost."
         Send-MailMessage -From $From -To $sendTo -Subject "EPICODB-VM $VM No Tag Assigned" -SmtpServer $Smtp -Body $MailString
    
@@ -36,7 +36,7 @@ foreach($VM in $VMs)
    #Check to see if the assigned VMTag matches the ESXi hostname
    Elseif ($VMTag -notlike $esxHost) {
 
-        #Output stating the VM needs to move to the assigned tag. Uncomment next line for this local console dispaly
+        #Output the VMname in the wrong location to local console
         #Write-Output "$VM needs to move to $VMTag"
 
         #Output the VMname in the wrong location to email.
