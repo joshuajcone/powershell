@@ -8,6 +8,6 @@ foreach ($Key in (Get-ItemProperty -Exclude *C7568B63* -path $RegistryPath).$Nam
     { Write-Output "Property already exist"
     }
     else {Set-ItemProperty -Exclude *C7568B63* -Path $RegistryPath -Name $Name -Value $Value
-    Write-Output "Value has been changed"
+    Write-Output "$Name has been changed to $Value"
     }
 }
