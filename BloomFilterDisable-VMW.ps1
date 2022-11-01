@@ -1,9 +1,8 @@
-## Supply the hostname/FQDN for your vcenter server, and the name of the cluster you want remediated
-## Script remediates each ESXi server in the cluster one at a time
-## Example ".\nameofthisscript.ps1 vcenter.test.com testcluster"
+# Supply the hostname/FQDN for your vcenter server, and the name of the cluster you want remediated
+# Script remediates each ESXi server in the cluster one at a time
+# Example ".\nameofthisscript.ps1 vcenter.test.com testcluster"
 
-## Args
-##################
+# Args
 # Check to make sure an argument was passed
 if ($args.count -ne 2) {
 Write-Host "Usage: .\nameofthisscript.ps1 vcenter.test.com testcluster"
@@ -14,21 +13,18 @@ exit
 $vCenterServer = $args[0]
 $ClusterName = $args[1]
 
-##################
-## Connect to infrastructure
-##################
+# Connect to infrastructure
+
 Connect-VIServer -Server $vCenterServer | Out-Null
 
-##################
-## Get Server Objects from the cluster
-##################
+# Get Server Objects from the cluster
+
 # Get VMware Server Object based on name passed as arg
 $ESXiServers = @(get-cluster $ClusterName | get-vmhost)
-
-    ##################
-    ## Puts an ESXI server in maintenance mode, changes the Bloom setting, and the puts it back online
-    ## Requires fully automated DRS and enough HA capacity to take a host off line
-    ##################
+    
+    # Puts an ESXI server in maintenance mode, changes the Bloom setting, and the puts it back online
+    # Requires fully automated DRS and enough HA capacity to take a host off line
+    
     Function BloomFilter ($CurrentServer) {
         # Get Server name
         $ServerName = $CurrentServer.Name
@@ -58,17 +54,11 @@ $ESXiServers = @(get-cluster $ClusterName | get-vmhost)
         }
         else {
             Write-Host "$ServerName is already set"
-                }
-        
+                }        
     }
     foreach ($ESXiServer in $ESXiServers) {
     BloomFilter ($ESXiServer)
 }
 
-
-
-##################
-## Cleanup
-##################
 # Close vCenter connection
 Disconnect-VIServer -Server $vCenterServer -Confirm:$False
