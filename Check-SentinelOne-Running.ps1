@@ -13,13 +13,13 @@ $sentinelpath = "$basePath$sentinelName"
 # Sets the location to run the command
 Set-Location $sentinelPath
 
-# Command to Check Status FDCS status
+# Command to Check Certificate Scan status
 $FDCSStatus = & ".\SentinelCtl.exe" read_fdcs_status
 
-#Comman to Check if Scan is Running
+#Command to Check if Disk Scan is Running
 $ScanStatus = & ".\SentinelCtl.exe" is_scan_in_progress
 
-# If Status is not 2 it will continue to check
+# If Certificate Scan Status is not 2 it will continue to check
 if ($FDCSStatus -ne "FDCS Status: 2") {
     $timer = [Diagnostics.Stopwatch]::StartNew()
     do {
@@ -28,14 +28,20 @@ if ($FDCSStatus -ne "FDCS Status: 2") {
         $FDCSStatus = & ".\SentinelCtl.exe" read_fdcs_status
     } until ($FDCSStatus -eq "FDCS Status: 2")
 }
+
+# If Disk Scan Status is in progress it will continue to check
 if ($ScanStatus -ne "Scan is not in progress") {
     $timer = [Diagnostics.Stopwatch]::StartNew()
     do {
         Write-Host "Sentinel Scan is Running"
+        
+        # Sleep timer between checks
         Start-Sleep -Seconds 60
         $ScanStatus = & ".\SentinelCtl.exe" is_scan_in_progress
     } until ($ScanStatus -eq "Scan is not in progress")
 }
+
+# Write the Output
 Write-Host "Sentinel Scan is Complete"
 if ($timer.IsRunning -eq $true) {
     $timer.Stop()
