@@ -43,13 +43,13 @@ if ($timer.IsRunning -eq $true) {
     $hours = $timer.elapsed.Hours
     $minutes = $timer.elapsed.Minutes
     $seconds = $timer.elapsed.Seconds
-    if ($null -ne $days) {
+    if ($days -ne 0) {
         Write-Host "Sentinel Scan took $days days, $hours hours, $minutes minutes, $seconds seconds"
     }
-    elseif ($null -ne $hours) {
+    elseif ($hours -ne 0) {
         Write-Host "Sentinel Scan took $hours hours, $minutes minutes, $seconds seconds"
     }
-    elseif ($null -ne $minutes) {
+    elseif ($minutes -ne 0) {
         Write-Host "Sentinel Scan took $minutes minutes, $seconds seconds"
     }
     else {
