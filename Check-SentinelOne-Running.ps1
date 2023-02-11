@@ -37,10 +37,22 @@ if ($ScanStatus -ne "Scan is not in progress") {
     } until ($ScanStatus -eq "Scan is not in progress")
 }
 Write-Host "Sentinel Scan is Complete"
-if ($null -ne $timer) {
+if ($timer.IsRunning -eq $true) {
     $timer.Stop()
-    $hours = $timer.elapsed.hours
-    $minutes = $timer.elapsed.minutes
-    $seconds = $timer.elapsed.seconds
-    Write-Host "Sentinel Scan took $hours hours, $minutes minutes, $seconds seconds"
+    $days = $timer.elapsed.Days
+    $hours = $timer.elapsed.Hours
+    $minutes = $timer.elapsed.Minutes
+    $seconds = $timer.elapsed.Seconds
+    if ($null -ne $days) {
+        Write-Host "Sentinel Scan took $days days, $hours hours, $minutes minutes, $seconds seconds"
+    }
+    elseif ($null -ne $hours) {
+        Write-Host "Sentinel Scan took $hours hours, $minutes minutes, $seconds seconds"
+    }
+    elseif ($null -ne $minutes) {
+        Write-Host "Sentinel Scan took $minutes minutes, $seconds seconds"
+    }
+    else {
+        Write-Host "Sentinel Scan took $seconds seconds"
+    }
 }
