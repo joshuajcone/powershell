@@ -27,7 +27,7 @@ function WindowsBestPractices() {
         Write-Log "MPIO Not Installed" -Severity Failed
         Write-Output "Installing MPIO" -ForegroundColor Red -NoNewline
         Add-WindowsFeature -Name Multipath-IO
-        Write-Log "Installing MPIO" -Severity Information
+        Write-Log "Installed MPIO" -Severity Information
         Write-Output "MPIO Installed, please restart"
     try {
         Write-Output "Restart is required, press enter to continue with reboot, or exit script to cancel"
